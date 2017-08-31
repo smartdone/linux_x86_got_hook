@@ -69,7 +69,7 @@ unsigned long get_module_base(pid_t pid, const char* module_name)
 					addr = 0;
 				}
 #elif defined(__i386__)
-				if (addr == 0x8000)
+				if (addr == 0x08048000)
 				{
 					addr = 0;
 				}
