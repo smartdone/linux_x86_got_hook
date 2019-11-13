@@ -25,8 +25,7 @@ pid_t new_getpid() {
 
 int main(int argc, const char *argv[]) {
 	// 找到oepn函数的地址
-	void * handle = dlopen("/lib/x86_64-linux-gnu/libc-2.23.so", RTLD_GLOBAL | RTLD_LAZY);
-	void * addr = dlsym(handle, "getpid");
+	void * addr = dlsym(NULL, "getpid");
 	printf("[+] before hook, pid = %d\n", getpid());
 	// 在自己的got表里面去匹配open的地址，并且替换，如果你要hook可执行文件，
 	// 第一个参数就写可执行文件的名字，如果你要hook加载的so，第一个参数就写
@@ -41,3 +40,25 @@ int main(int argc, const char *argv[]) {
 }
 ```
 
+## 编译引用
+
+### 编译
+
+支持cmake构建成静态库
+
+```shell
+mkdir build
+cd build
+cmake ../
+make
+```
+
+cmake 选项
+
+1. `BUILD_32`指定编译32位的静态库
+2. `BUILD_64`指定编译64位静态库
+3. `TEST`编译测试文件
+
+### 引用
+
+使用`CMAKE_PREFIX_PATH`选项引用此项目编译的文件夹，然后`find_package`找到这个库即可
