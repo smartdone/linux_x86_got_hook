@@ -11,6 +11,9 @@ if(BUILD_64)
   set(CMAKE_CXX_FLAGS "-m64")
 endif()
 
+set(CMAKE_C_FLAGS "-fPIC")
+set(CMAKE_CXX_FLAGS "-fPIC")
+
 add_library(gothook STATIC
   gothook.cpp
   gothook.h
